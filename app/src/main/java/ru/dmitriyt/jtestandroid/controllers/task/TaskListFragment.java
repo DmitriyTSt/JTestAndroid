@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ru.dmitriyt.jtestandroid.R;
 import ru.dmitriyt.jtestandroid.databinding.FragmentTaskListBinding;
@@ -36,30 +37,47 @@ public class TaskListFragment extends Fragment {
         tests.add(new Test(12332, "Первый вопрос?"));
         tests.add(new Test(12532, "Второй вопрос?"));
         tests.add(new Test(21532, "Третий вопрос?"));
-        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение","DmT", 11, tests));
-        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение","DmT", 12,  tests));
-        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение","DmT", 10,  tests));
-        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение","DmT", 11,  tests));
-        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение","DmT", 12,  tests));
-        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение","DmT", 10,  tests));
-        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение","DmT", 11,  tests));
-        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение","DmT", 12,  tests));
-        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение","DmT", 10,  tests));
-        final TaskListAdapter adapter = new TaskListAdapter(tasks);
+        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 1","DmT", 11, tests));
+        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 1","DmT", 12,  tests));
+        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 1","DmT", 10,  tests));
+        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 2","DmT", 11,  tests));
+        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 2","DmT", 12,  tests));
+        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 2","DmT", 10,  tests));
+        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 3","DmT", 11,  tests));
+        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 3","DmT", 12,  tests));
+        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 3","DmT", 10,  tests));
+
+
+
+//        final TaskListAdapter adapter = new TaskListAdapter(tasks);
+//        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//
+//        binding.taskList.setLayoutManager(manager);
+//        adapter.setOnItemClickListener(new TaskListAdapter.OnItemClickListener() {
+//            @Override
+//            public void setOnClickListener(View view, int position) {
+//                Log.d("startTaskActivity", "pos " + position);
+//                Intent intent = new Intent(getContext(), TaskActivity.class);
+//                intent.putExtra("task", adapter.getTasks().get(position));
+//                startActivity(intent);
+//
+//            }
+//        });
+//        binding.taskList.setAdapter(adapter);
+        ArrayList<String> themes = new ArrayList<>();
+        HashMap<String, ArrayList<Task>> theme_grouped_task = new HashMap<>();
+        for(int i = 0; i < tasks.size(); i++) {
+            String ctheme = tasks.get(i).getTheme();
+            if (!theme_grouped_task.containsKey(ctheme)) theme_grouped_task.put(ctheme, new ArrayList<Task>());
+            theme_grouped_task.get(ctheme).add(tasks.get(i));
+            if (!themes.contains(ctheme)) themes.add(ctheme);
+        }
+
+        ThemeListAdapter adapter = new ThemeListAdapter(themes, theme_grouped_task, getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
         binding.taskList.setLayoutManager(manager);
-        adapter.setOnItemClickListener(new TaskListAdapter.OnItemClickListener() {
-            @Override
-            public void setOnClickListener(View view, int position) {
-                Log.d("startTaskActivity", "pos " + position);
-                Intent intent = new Intent(getContext(), TaskActivity.class);
-                intent.putExtra("task", adapter.getTasks().get(position));
-                startActivity(intent);
-
-            }
-        });
         binding.taskList.setAdapter(adapter);
+
         return binding.getRoot();
     }
 }
