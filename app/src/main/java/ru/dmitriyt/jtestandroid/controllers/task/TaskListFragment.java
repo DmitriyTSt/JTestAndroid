@@ -43,6 +43,7 @@ public class TaskListFragment extends Fragment {
         tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 2","DmT", 11,  tests));
         tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 2","DmT", 12,  tests));
         tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 2","DmT", 10,  tests));
+
         tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 3","DmT", 11,  tests));
         tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 3","DmT", 12,  tests));
         tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 3","DmT", 10,  tests));
