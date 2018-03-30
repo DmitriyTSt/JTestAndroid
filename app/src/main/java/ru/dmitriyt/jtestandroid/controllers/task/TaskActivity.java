@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 import ru.dmitriyt.jtestandroid.R;
 import ru.dmitriyt.jtestandroid.controllers.test.TestActivity;
 import ru.dmitriyt.jtestandroid.databinding.ActivityTaskBinding;
+import ru.dmitriyt.jtestandroid.datasource.model.Mark;
 import ru.dmitriyt.jtestandroid.datasource.model.Task;
 import ru.dmitriyt.jtestandroid.datasource.model.Test;
 
@@ -30,14 +33,11 @@ public class TaskActivity extends AppCompatActivity {
         binding.taskName.setText(task.getName());
         binding.taskTheme.setText(task.getTheme());
         binding.taskAuthor.setText(task.getAuthor());
-        binding.taskSize.setText(String.valueOf(task.getMax()));
-        binding.btnStartTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                intent.putExtra("task", task);
-                startActivityForResult(intent, 1);
-            }
+        binding.taskSize.setText(String.valueOf(task.getTests().size()));
+        binding.btnStartTask.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+            intent.putExtra("task", task);
+            startActivityForResult(intent, 1);
         });
     }
 
@@ -47,7 +47,15 @@ public class TaskActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 binding.taskComplited.setVisibility(View.VISIBLE);
                 binding.taskMarkLayout.setVisibility(View.VISIBLE);
-                binding.taskMark.setText(String.valueOf(data.getIntExtra("mark", 0)));
+                binding.taskBallsLayout.setVisibility(View.VISIBLE);
+                binding.taskBalls.setText(
+                        String.valueOf(data.getIntExtra("balls", 0))
+                        + "/" +
+                        String.valueOf(data.getIntExtra("maxBalls", 0)));
+                //String.format("%d/%d", data.getIntExtra("balls", 0), String.valueOf(data.getIntExtra("maxBalls", 0)));
+                binding.taskMark.setText(String.valueOf(
+                        new Mark(data.getIntExtra("balls", 0),
+                                 data.getIntExtra("maxBalls", 0)).getMark()));
             }
         }
 

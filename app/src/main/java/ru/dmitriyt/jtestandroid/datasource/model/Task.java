@@ -166,4 +166,28 @@ public class Task extends BaseModel {
             }
         return -1;
     }
+
+    public boolean isShowTestMark() {
+        return showTestMark;
+    }
+
+    public void setShowTestMark(boolean showTestMark) {
+        this.showTestMark = showTestMark;
+    }
+
+    public boolean isShowTaskMark() {
+        return showTaskMark;
+    }
+
+    public void setShowTaskMark(boolean showTaskMark) {
+        this.showTaskMark = showTaskMark;
+    }
+
+    public boolean isShowTrueAnswer() {
+        return showTrueAnswer;
+    }
+
+    public void setShowTrueAnswer(boolean showTrueAnswer) {
+        this.showTrueAnswer = showTrueAnswer;
+    }
 }

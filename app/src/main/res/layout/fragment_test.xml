@@ -18,7 +18,7 @@
             android:layout_gravity="center"
             android:background="@drawable/ic_launcher_background"/>
         <ScrollView
-            android:id="@+id/test_answers"
+            android:id="@+id/test_answers_wrap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

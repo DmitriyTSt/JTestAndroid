@@ -87,7 +87,7 @@
                 android:visibility="gone"
                 android:textColor="#55AA00"/>
             <RelativeLayout
-                android:id="@+id/task_mark_layout"
+                android:id="@+id/task_balls_layout"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -97,6 +97,25 @@
                     android:layout_alignParentStart="true"
                     android:textSize="@dimen/text_size_standart"
                     android:text="Набрано баллов"/>
+                <TextView
+                    android:id="@+id/task_balls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="@dimen/text_size_standart"
+                    android:textColor="@color/colorTextDark"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/task_mark_layout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/text_size_standart"
+                    android:text="Оценка"/>
                 <TextView
                     android:id="@+id/task_mark"
                     android:layout_width="wrap_content"
