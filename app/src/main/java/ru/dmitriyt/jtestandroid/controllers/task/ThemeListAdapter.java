@@ -80,8 +80,10 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.Them
             isTaskShow = !isTaskShow;
             if (isTaskShow) {
                 mBinding.themeTaskList.setVisibility(View.VISIBLE);
+                mBinding.themeNameWrap.setBackgroundColor(mContext.getResources().getColor(R.color.colorBackgroundPrimary));
             } else {
                 mBinding.themeTaskList.setVisibility(View.GONE);
+                mBinding.themeNameWrap.setBackgroundColor(mContext.getResources().getColor(R.color.colorBackgroundDefault));
             }
         }
     }

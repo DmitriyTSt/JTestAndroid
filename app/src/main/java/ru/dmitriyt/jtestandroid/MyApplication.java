@@ -39,7 +39,7 @@ public class MyApplication extends Application {
     }
 
     public String getApiUrl() {
-        return "http://dmitriyt.ru/jtestandroid";
+        return "http://dmitriyt.ru/jtestandroid/";
     }
 
     public MainApiInterface getMainApiInterface() {

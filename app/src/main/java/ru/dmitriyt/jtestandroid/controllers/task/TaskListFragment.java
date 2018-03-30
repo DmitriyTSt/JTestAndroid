@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ru.dmitriyt.jtestandroid.MyApplication;
 import ru.dmitriyt.jtestandroid.R;
 import ru.dmitriyt.jtestandroid.databinding.FragmentTaskListBinding;
 import ru.dmitriyt.jtestandroid.datasource.model.Task;
@@ -26,14 +30,16 @@ import ru.dmitriyt.jtestandroid.datasource.model.Test;
 
 public class TaskListFragment extends Fragment {
     private FragmentTaskListBinding binding;
+    private ArrayList<Task> tasks;
+    private ArrayList<Test> tests;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task_list, container, false);
 
-        ArrayList<Task> tasks = new ArrayList<>();
-        ArrayList<Test> tests = new ArrayList<>();
+        tasks = new ArrayList<>();
+        tests = new ArrayList<>();
         tests.add(new Test(12332, "Первый вопрос?"));
         tests.add(new Test(12532, "Второй вопрос?"));
         tests.add(new Test(21532, "Третий вопрос?"));
@@ -44,10 +50,23 @@ public class TaskListFragment extends Fragment {
         tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 2","DmT", 12,  tests));
         tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 2","DmT", 10,  tests));
 
-        tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 3","DmT", 11,  tests));
-        tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 3","DmT", 12,  tests));
-        tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 3","DmT", 10,  tests));
 
+        MyApplication.getInstance().getMainApiInterface().getTestTask().enqueue(new Callback<Task>() {
+            @Override
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                Log.d("GET_TASK", response.body().toString());
+                tasks.add(response.body());
+                tasks.add(new Task(true,"Линней, Ламарк","Эволюционное учение 3","DmT", 11,  tests));
+                tasks.add(new Task(true,"Теория Дарвина","Эволюционное учение 3","DmT", 12,  tests));
+                tasks.add(new Task(true,"Доказательства эволюции","Эволюционное учение 3","DmT", 10,  tests));
+                setView();
+            }
+
+            @Override
+            public void onFailure(Call<Task> call, Throwable t) {
+                Log.d("GET_TASK", t.toString());
+            }
+        });
 
 
 //        final TaskListAdapter adapter = new TaskListAdapter(tasks);
@@ -65,6 +84,12 @@ public class TaskListFragment extends Fragment {
 //            }
 //        });
 //        binding.taskList.setAdapter(adapter);
+
+
+        return binding.getRoot();
+    }
+
+    private void setView() {
         ArrayList<String> themes = new ArrayList<>();
         HashMap<String, ArrayList<Task>> theme_grouped_task = new HashMap<>();
         for(int i = 0; i < tasks.size(); i++) {
@@ -78,7 +103,5 @@ public class TaskListFragment extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.taskList.setLayoutManager(manager);
         binding.taskList.setAdapter(adapter);
-
-        return binding.getRoot();
     }
 }

@@ -30,12 +30,32 @@ public class Test extends BaseModel {
 
     private ArrayList<Answer> answers;
 
-    public Test(int id, String name) {
+    public Test(int id, String desc) {
         super(id);
-        this.name = name;
+        this.desc = desc;
     }
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", testType=" + testType +
+                ", comment='" + comment + '\'' +
+                ", group=" + group +
+                ", timeOut=" + timeOut +
+                ", timePause=" + timePause +
+                ", maxBall=" + maxBall +
+                ", minBall=" + minBall +
+                ", mixed=" + mixed +
+                ", order=" + order +
+                ", orderFine=" + orderFine +
+                ", cntRight=" + cntRight +
+                ", answers=" + answers +
+                '}';
     }
 }
