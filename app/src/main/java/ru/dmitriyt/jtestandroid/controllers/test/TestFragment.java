@@ -92,10 +92,11 @@ public class TestFragment extends Fragment {
     }
 
     private int currentBall;
-    private RadioGroup rg;
 
     private void setAnswersView(int testType) {
+        RadioGroup rg;
         switch (testType) {
+
             case TestType.OneRight :
                 currentBall = test.getMinBall();
                 rg = new RadioGroup(getContext());
@@ -115,23 +116,27 @@ public class TestFragment extends Fragment {
                 });
                 binding.testAnswersWrap.addView(rg);
                 break;
+
             case TestType.SomeRight:
                 currentBall = 0;
                 rg = new RadioGroup(getContext());
+                CheckBox[] cbs = new CheckBox[test.getAnswers().size()];
+                int i = 0;
                 for (Answer ans : test.getAnswers()) {
-                    CheckBox cb = new CheckBox(getContext());
-                    cb.setText(ans.getText());
-                    cb.setId(ans.getId());
-                    rg.addView(cb);
+                    cbs[i] = new CheckBox(getContext());
+                    cbs[i].setText(ans.getText());
+                    cbs[i].setId(ans.getId());
+                    cbs[i].setOnClickListener(v -> {
+                        Log.d("CB_CLICK", "position = " + v.getId());
+                        int delta = ((CheckBox)v).isChecked() ? 1 : -1;
+                        if (test.getAnswerById(v.getId()).isCorrect()) {
+                            currentBall += delta;
+                        } else {
+                            currentBall -= delta;
+                        }
+                    });
+                    rg.addView(cbs[i]);
                 }
-                rg.setOnCheckedChangeListener(((radioGroup, id) -> {
-                    Log.d("CB_CLICK", "position = " + id);
-                    if (test.getAnswerById(id).isCorrect()) {
-                        currentBall++;
-                    } else {
-                        currentBall--;
-                    }
-                }));
                 binding.testAnswersWrap.addView(rg);
                 break;
             default:
