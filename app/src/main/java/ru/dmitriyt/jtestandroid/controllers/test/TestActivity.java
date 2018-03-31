@@ -17,7 +17,6 @@ public class TestActivity extends AppCompatActivity {
     private Task task;
     private int balls;
     private int maxBalls;
-    private int radioBtnId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,6 @@ public class TestActivity extends AppCompatActivity {
         task = (Task) getIntent().getSerializableExtra("task");
         balls = 0;
         maxBalls = 0;
-        radioBtnId = 1;
         if (task.isCanMix() && task.getTests() != null) task.shuffleTests();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
         getSupportFragmentManager()
@@ -57,13 +55,5 @@ public class TestActivity extends AppCompatActivity {
 
     public void addBalls(int balls) {
         this.balls += balls;
-    }
-
-    public int getRadioBtnId() {
-        return radioBtnId;
-    }
-
-    public void incRadioBtnId(int add) {
-        this.radioBtnId += add;
     }
 }

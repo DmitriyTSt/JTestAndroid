@@ -97,17 +97,15 @@ public class TestFragment extends Fragment {
             case 1:
                 currentBall = test.getMinBall();
                 rg = new RadioGroup(getContext());
-                for (Answer ans : task.getTestById(testId).getAnswers()) {
+                for (Answer ans : test.getAnswers()) {
                     RadioButton rb = new RadioButton(getContext());
                     rb.setText(ans.getText());
+                    rb.setId(ans.getId());
                     rg.addView(rb);
                 }
-                rg.setOnCheckedChangeListener((radioGroup, i) -> {
-                    Log.d("RB_CLICK", "position = " + i);
-                    // один и тот же фрагмент, поэтому айдишники радиокнопок все возрастают
-                    // надо их резать до величины массива ответов
-                    i -= testActivity.getRadioBtnId();
-                    if (test.getAnswers().get(i).isCorrect()) {
+                rg.setOnCheckedChangeListener((radioGroup, id) -> {
+                    Log.d("RB_CLICK", "position = " + id);
+                    if (test.getAnswerById(id).isCorrect()) {
                         currentBall = test.getMaxBall();
                     } else {
                         currentBall = test.getMinBall();

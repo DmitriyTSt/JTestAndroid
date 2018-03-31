@@ -36,6 +36,12 @@ public class Test extends BaseModel {
         this.desc = desc;
     }
 
+    public Answer getAnswerById(int id) {
+        for(Answer ans : answers)
+            if (ans.getId() == id) return ans;
+        return new Answer();
+    }
+
     public void shuffleAnswers() {
         Collections.shuffle(answers);
     }
