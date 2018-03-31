@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import ru.dmitriyt.jtestandroid.datasource.model.Answer;
 import ru.dmitriyt.jtestandroid.datasource.model.Mark;
 import ru.dmitriyt.jtestandroid.datasource.model.Task;
 import ru.dmitriyt.jtestandroid.datasource.model.Test;
+import ru.dmitriyt.jtestandroid.datasource.model.TestType;
 
 /**
  * Created by dmitriytomilov on 09.03.2018.
@@ -94,7 +96,7 @@ public class TestFragment extends Fragment {
 
     private void setAnswersView(int testType) {
         switch (testType) {
-            case 1:
+            case TestType.OneRight :
                 currentBall = test.getMinBall();
                 rg = new RadioGroup(getContext());
                 for (Answer ans : test.getAnswers()) {
@@ -111,6 +113,25 @@ public class TestFragment extends Fragment {
                         currentBall = test.getMinBall();
                     }
                 });
+                binding.testAnswersWrap.addView(rg);
+                break;
+            case TestType.SomeRight:
+                currentBall = 0;
+                rg = new RadioGroup(getContext());
+                for (Answer ans : test.getAnswers()) {
+                    CheckBox cb = new CheckBox(getContext());
+                    cb.setText(ans.getText());
+                    cb.setId(ans.getId());
+                    rg.addView(cb);
+                }
+                rg.setOnCheckedChangeListener(((radioGroup, id) -> {
+                    Log.d("CB_CLICK", "position = " + id);
+                    if (test.getAnswerById(id).isCorrect()) {
+                        currentBall++;
+                    } else {
+                        currentBall--;
+                    }
+                }));
                 binding.testAnswersWrap.addView(rg);
                 break;
             default:

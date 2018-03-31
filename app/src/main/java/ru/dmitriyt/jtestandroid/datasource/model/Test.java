@@ -9,9 +9,6 @@ import java.util.Collections;
  */
 
 public class Test extends BaseModel {
-    enum TestType {
-        OneRight, SomeRight, OrderRight, TextRight
-    }
 
     private String name;
     private String desc;
