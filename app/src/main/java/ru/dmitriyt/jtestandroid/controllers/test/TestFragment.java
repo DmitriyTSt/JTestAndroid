@@ -113,12 +113,14 @@ public class TestFragment extends Fragment {
                 });
                 binding.testAnswersWrap.addView(rg);
                 break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
+            default:
+                new AlertDialog.Builder(getContext())
+                        .setMessage("Данный тип вопросов не поддерживается в приложении")
+                        .setCancelable(false)
+                        .setPositiveButton("Пропустить", (dialog, id) -> {
+                            dialog.cancel();
+                            goToNext();
+                        }).create().show();
         }
     }
 
@@ -133,9 +135,6 @@ public class TestFragment extends Fragment {
     }
 
     private void goToNext() {
-        if (test.getTestType() == 1) {
-            testActivity.incRadioBtnId(test.getAnswers().size());
-        }
         testActivity.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container_test, TestFragment.newInstance(task.getNextTestId(testId)))
