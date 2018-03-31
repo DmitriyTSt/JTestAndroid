@@ -3,6 +3,7 @@ package ru.dmitriyt.jtestandroid.controllers.test;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import ru.dmitriyt.jtestandroid.R;
 import ru.dmitriyt.jtestandroid.databinding.ActivityTestBinding;
@@ -55,5 +56,22 @@ public class TestActivity extends AppCompatActivity {
 
     public void addBalls(int balls) {
         this.balls += balls;
+    }
+
+    public void showFullImage() {
+        binding.fragmentContainerTest.setVisibility(View.GONE);
+        binding.btnTestNext.setVisibility(View.GONE);
+        binding.imageFull.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.imageFull.getVisibility() == View.VISIBLE) {
+            binding.imageFull.setVisibility(View.GONE);
+            binding.btnTestNext.setVisibility(View.VISIBLE);
+            binding.fragmentContainerTest.setVisibility(View.VISIBLE);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

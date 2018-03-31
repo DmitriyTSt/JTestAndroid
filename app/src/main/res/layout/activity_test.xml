@@ -3,12 +3,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <WebView
+            android:id="@+id/image_full"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </WebView>
         <FrameLayout
             android:id="@+id/fragment_container_test"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_test_next"
-            android:layout_margin="@dimen/standart_margin">
+            android:layout_marginStart="@dimen/standart_margin"
+            android:layout_marginEnd="@dimen/standart_margin"
+            android:layout_marginTop="@dimen/standart_margin">
 
         </FrameLayout>
         <Button
@@ -17,7 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/standart_margin"
+            android:layout_marginStart="@dimen/standart_margin"
+            android:layout_marginEnd="@dimen/standart_margin"
+            android:layout_marginBottom="@dimen/standart_margin"
             android:text="Ответить"/>
     </RelativeLayout>
 </layout>
