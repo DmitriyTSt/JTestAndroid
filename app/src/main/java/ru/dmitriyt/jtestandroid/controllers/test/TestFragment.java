@@ -74,6 +74,8 @@ public class TestFragment extends Fragment {
             binding.testName.setText(test.getDesc());
             Picasso.get().load(test.getImage()).into(binding.testImage);
             binding.testImage.setOnClickListener(v -> {
+                ((TestActivity) getActivity()).getBinding().imageFull.getSettings().setUseWideViewPort(true);
+                ((TestActivity) getActivity()).getBinding().imageFull.getSettings().setLoadWithOverviewMode(true);
                 ((TestActivity) getActivity()).getBinding().imageFull.getSettings().setBuiltInZoomControls(true);
                 ((TestActivity) getActivity()).getBinding().imageFull.loadUrl(test.getImage());
                 ((TestActivity) getActivity()).showFullImage();
