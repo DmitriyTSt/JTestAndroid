@@ -2,15 +2,13 @@ package ru.dmitriyt.jtestandroid.datasource.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by dmitriytomilov on 09.03.2018.
  */
 
 public class Test extends BaseModel {
-    enum TestType {
-        OneRight, SomeRight, OrderRight, TextRight
-    }
 
     private String name;
     private String desc;
@@ -35,6 +33,16 @@ public class Test extends BaseModel {
         this.desc = desc;
     }
 
+    public Answer getAnswerById(int id) {
+        for(Answer ans : answers)
+            if (ans.getId() == id) return ans;
+        return new Answer();
+    }
+
+    public void shuffleAnswers() {
+        Collections.shuffle(answers);
+    }
+
     public String getName() {
         return name;
     }
@@ -57,5 +65,113 @@ public class Test extends BaseModel {
                 ", cntRight=" + cntRight +
                 ", answers=" + answers +
                 '}';
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public int getTestType() {
+        return testType;
+    }
+
+    public void setTestType(int testType) {
+        this.testType = testType;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getGroup() {
+        return group;
+    }
+
+    public void setGroup(int group) {
+        this.group = group;
+    }
+
+    public int getTimeOut() {
+        return timeOut;
+    }
+
+    public void setTimeOut(int timeOut) {
+        this.timeOut = timeOut;
+    }
+
+    public int getTimePause() {
+        return timePause;
+    }
+
+    public void setTimePause(int timePause) {
+        this.timePause = timePause;
+    }
+
+    public int getMaxBall() {
+        return maxBall;
+    }
+
+    public void setMaxBall(int maxBall) {
+        this.maxBall = maxBall;
+    }
+
+    public int getMinBall() {
+        return minBall;
+    }
+
+    public void setMinBall(int minBall) {
+        this.minBall = minBall;
+    }
+
+    public boolean isMixed() {
+        return mixed;
+    }
+
+    public void setMixed(boolean mixed) {
+        this.mixed = mixed;
+    }
+
+    public boolean isOrder() {
+        return order;
+    }
+
+    public void setOrder(boolean order) {
+        this.order = order;
+    }
+
+    public int getOrderFine() {
+        return orderFine;
+    }
+
+    public void setOrderFine(int orderFine) {
+        this.orderFine = orderFine;
+    }
+
+    public int getCntRight() {
+        return cntRight;
+    }
+
+    public void setCntRight(int cntRight) {
+        this.cntRight = cntRight;
+    }
+
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
     }
 }
