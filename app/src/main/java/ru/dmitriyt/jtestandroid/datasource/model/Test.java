@@ -14,6 +14,8 @@ public class Test extends BaseModel {
     private String desc;
     private int testType;
 
+    private String image;
+
     private String comment; // Текст на ошибочный ответ
     private int group;
     private int timeOut; // Время на тест
@@ -53,6 +55,7 @@ public class Test extends BaseModel {
                 "name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", testType=" + testType +
+                ", image='" + image + '\'' +
                 ", comment='" + comment + '\'' +
                 ", group=" + group +
                 ", timeOut=" + timeOut +
@@ -173,5 +176,13 @@ public class Test extends BaseModel {
 
     public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

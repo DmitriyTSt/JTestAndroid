@@ -16,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import ru.dmitriyt.jtestandroid.R;
 import ru.dmitriyt.jtestandroid.controllers.task.TaskActivity;
 import ru.dmitriyt.jtestandroid.databinding.FragmentTaskEndBinding;
@@ -70,6 +72,14 @@ public class TestFragment extends Fragment {
             test = task.getTestById(testId);
             Toast.makeText(getContext(), String.valueOf(test.getId()), Toast.LENGTH_SHORT).show();
             binding.testName.setText(test.getDesc());
+            Picasso.get().load(test.getImage()).into(binding.testImage);
+            binding.testImage.setOnClickListener(v -> {
+                ((TestActivity) getActivity()).getBinding().imageFull.getSettings().setUseWideViewPort(true);
+                ((TestActivity) getActivity()).getBinding().imageFull.getSettings().setLoadWithOverviewMode(true);
+                ((TestActivity) getActivity()).getBinding().imageFull.getSettings().setBuiltInZoomControls(true);
+                ((TestActivity) getActivity()).getBinding().imageFull.loadUrl(test.getImage());
+                ((TestActivity) getActivity()).showFullImage();
+            });
 
             // нарисовали название, идем к ответам
             if (test.isMixed()) {

@@ -8,15 +8,18 @@
             android:id="@+id/test_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp"
             android:text="Текст вопроса"/>
         <ImageView
             android:id="@+id/test_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="120dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
             android:contentDescription="TestPicture"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_launcher_background"/>
+            android:layout_gravity="center"/>
         <ScrollView
             android:id="@+id/test_answers_wrap"
             android:layout_width="match_parent"
